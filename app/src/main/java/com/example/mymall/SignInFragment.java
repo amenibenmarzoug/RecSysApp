@@ -1,12 +1,13 @@
 package com.example.mymall;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.example.mymall.RegisterActivity.onResetPasswordFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +36,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignInFragment extends Fragment {
 
 
-   public SignInFragment() {
+
+    public SignInFragment() {
         // Required empty public constructor
     }
 
@@ -91,6 +95,7 @@ public class SignInFragment extends Fragment {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onResetPasswordFragment = true;
                 setFragment(new ResetPasswordFragment());
             }
         });
@@ -146,7 +151,7 @@ public class SignInFragment extends Fragment {
 
 
     private void setFragment(Fragment fragment) {
-        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
         transaction.replace(parentFrameLayout.getId(),fragment);
         transaction.commit();
